@@ -15,23 +15,10 @@ bg_color = Color(0.752941, 0.164706, 0.156863, 0)
 [node name="World" type="Node"]
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(160, 88)
-scale = Vector2(1.11111, 0.884422)
+position = Vector2(160, 90)
+scale = Vector2(1.11111, 1.125)
 texture = ExtResource("5_mher8")
-region_enabled = true
 region_rect = Rect2(0, 0, 288, 199.592)
-
-[node name="HUD1" type="Sprite2D" parent="."]
-position = Vector2(40, 16)
-texture = ExtResource("5_mher8")
-region_enabled = true
-region_rect = Rect2(0, 199.647, 79.9361, 33.3529)
-
-[node name="HUD2" type="Sprite2D" parent="."]
-position = Vector2(280, 16)
-texture = ExtResource("5_mher8")
-region_enabled = true
-region_rect = Rect2(208.516, 199.976, 79.7894, 33.4431)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -51,10 +38,10 @@ frames = ExtResource("4_fsqmq")
 health_bar = NodePath("../HealthBar2")
 
 [node name="HealthBar1" type="ProgressBar" parent="."]
-offset_left = 17.0
-offset_top = 18.0
-offset_right = 96.0
-offset_bottom = 41.0
+offset_left = 18.0
+offset_top = 21.0
+offset_right = 97.0
+offset_bottom = 44.0
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_vl60e")
@@ -64,10 +51,10 @@ value = 100.0
 script = ExtResource("5_6pus4")
 
 [node name="HealthBar2" type="ProgressBar" parent="."]
-offset_left = 262.0
-offset_top = 18.0
-offset_right = 341.0
-offset_bottom = 41.0
+offset_left = 261.0
+offset_top = 21.0
+offset_right = 340.0
+offset_bottom = 44.0
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_vl60e")
