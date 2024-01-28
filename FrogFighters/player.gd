@@ -12,7 +12,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	if player_number == "2":
 		$AnimatedSprite2D.set_flip_h(true)
-		$AnimatedSprite2D.set_offset(Vector2(-5, 0))
+		$AnimatedSprite2D.offset *= Vector2(-1, 0)
 		
 	$AnimatedSprite2D.set_sprite_frames(frames)
 	
