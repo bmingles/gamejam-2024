@@ -12,7 +12,20 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking: String = ""
 var is_taking_damage = false
 
+var audio_clips
+const audio_delay = {
+	"fish": .2,
+	"chicken": 1.2
+}
+
 func _ready():
+	audio_clips = {
+		"laugh": preload("res://assets/audio/laugh.mp3"),
+		"chicken": preload("res://assets/audio/chicken.mp3"),
+		"fish": preload("res://assets/audio/fish.mp3"),
+		"jump": preload("res://assets/audio/jump.mp3")
+	}
+	
 	toggle_attack("")
 
 	if player_number == "2":
@@ -32,6 +45,7 @@ func _physics_process(delta):
 	# Jump
 	if Input.is_action_just_pressed("player" + player_number + "_jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		play_audio("jump")
 
 	var actions = get_actions()
 
@@ -49,20 +63,39 @@ func _physics_process(delta):
 
 func _on_animation_finished():
 	toggle_attack("")
-	toggle_taking_damage(false)
+	toggle_taking_damage(0)
 
 func toggle_attack(value: String):
 	is_attacking = value
-	$HitBox/CollisionShape2D.disabled = !is_attacking
+	if is_attacking:
+		await get_tree().create_timer(.2).timeout
+		$HitBox/CollisionShape2D.disabled = false
+	else:
+		$HitBox/CollisionShape2D.disabled = true
+			
 	if is_attacking:
 		$AnimatedSprite2D.play(value)
+		play_audio(value)
 		
-func toggle_taking_damage(value: bool):
+func toggle_taking_damage(value: int):
 	toggle_attack("")
 	is_taking_damage = value
 	if value:
+		# TODO: tie to get_audio_delay() but need way to know which attack is hitting
+		await get_tree().create_timer(.2).timeout
+		
 		$AnimatedSprite2D.play("laugh")
 		$AnimatedSprite2D/AnimationPlayer.play("hit_animation")
+		play_audio("laugh")
+		health_bar.take_damage(value)
+
+func get_audio_delay(clip_name: String):
+	return audio_delay[clip_name] if audio_delay.has(clip_name) else 0
+		
+func play_audio(clip_name: String):
+	$SoundEffect.stream = audio_clips[clip_name]
+	await get_tree().create_timer(get_audio_delay(clip_name)).timeout
+	$SoundEffect.play()
 
 func get_actions():
 	return {
@@ -93,6 +126,4 @@ func take_damage(amount: int):
 	if health_bar == null:
 		return
 
-	health_bar.take_damage(amount)
-	toggle_taking_damage(true)
-
+	toggle_taking_damage(amount)

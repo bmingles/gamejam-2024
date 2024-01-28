@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c406xs2gdbw5y"]
+[gd_scene load_steps=14 format=3 uid="uid://c406xs2gdbw5y"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_meufp"]
 [ext_resource type="SpriteFrames" uid="uid://bvrj62vptk1wp" path="res://resources/mermit_sprite_frames.tres" id="2_6hby3"]
 [ext_resource type="Script" path="res://scripts/hit_box.gd" id="3_ll44e"]
 [ext_resource type="Script" path="res://scripts/hurt_box.gd" id="4_h3ncn"]
+[ext_resource type="AudioStream" uid="uid://dd3lr1tl3ui18" path="res://resources/laugh_sound.tres" id="5_v3cqj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_603jh"]
 size = Vector2(16, 27)
@@ -89,8 +90,6 @@ material = SubResource("ShaderMaterial_djul4")
 scale = Vector2(0.4, 0.4)
 sprite_frames = ExtResource("2_6hby3")
 animation = &"fish"
-frame = 5
-frame_progress = 1.0
 offset = Vector2(5, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
@@ -114,3 +113,6 @@ script = ExtResource("4_h3ncn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_cbl4f")
+
+[node name="SoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_v3cqj")
