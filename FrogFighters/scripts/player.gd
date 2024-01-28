@@ -60,7 +60,9 @@ func toggle_attack(value: String):
 func toggle_taking_damage(value: bool):
 	toggle_attack("")
 	is_taking_damage = value
-	$AnimatedSprite2D.play("laugh")
+	if value:
+		$AnimatedSprite2D.play("laugh")
+		$AnimatedSprite2D/AnimationPlayer.play("hit_animation")
 
 func get_actions():
 	return {
