@@ -16,5 +16,7 @@ shape = SubResource("RectangleShape2D_603jh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 sprite_frames = ExtResource("2_6hby3")
-animation = &"idle"
+animation = &"laugh"
 offset = Vector2(5, 0)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]

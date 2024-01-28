@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -200.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var is_attacking = false
 
 func _ready():
 	if player_number == "2":
@@ -32,8 +33,23 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
+	var is_fish = Input.is_action_just_pressed("player" + player_number + "_fish")
+	var is_chicken = Input.is_action_just_pressed("player" + player_number + "_chicken")
+	var is_laugh = Input.is_action_just_pressed("player" + player_number + "_laugh")
+		
 	# Pick animation
-	if is_on_floor():
+	if is_attacking:
+		pass
+	elif is_fish:
+		is_attacking = true
+		$AnimatedSprite2D.play('fish')
+	elif is_laugh:
+		is_attacking = true
+		$AnimatedSprite2D.play('laugh')
+	elif is_chicken:
+		is_attacking = true
+		$AnimatedSprite2D.play('chicken')
+	elif is_on_floor():
 		if direction:
 			$AnimatedSprite2D.play("shuffle")
 		else:
@@ -42,3 +58,8 @@ func _physics_process(delta):
 		$AnimatedSprite2D.play("jump")
 
 	move_and_slide()
+
+
+
+func _on_animation_finished():
+	is_attacking = false

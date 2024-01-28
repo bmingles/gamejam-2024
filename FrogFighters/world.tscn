@@ -1,27 +1,42 @@
 [gd_scene load_steps=5 format=3 uid="uid://dlxbjf5p3rhy8"]
 
-[ext_resource type="Script" path="res://world.gd" id="1_b4utf"]
 [ext_resource type="PackedScene" uid="uid://c406xs2gdbw5y" path="res://player.tscn" id="2_5ptf1"]
 [ext_resource type="SpriteFrames" uid="uid://bvrj62vptk1wp" path="res://resources/mermit_sprite_frames.tres" id="3_isxox"]
 [ext_resource type="SpriteFrames" uid="uid://ilo38ei8qgsp" path="res://resources/termit_sprite_frames.tres" id="4_fsqmq"]
+[ext_resource type="Texture2D" uid="uid://dq72wnjkn55l6" path="res://assets/scenery.png" id="5_mher8"]
 
 [node name="World" type="Node"]
-script = ExtResource("1_b4utf")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(160, 88)
+scale = Vector2(1.11111, 0.884422)
+texture = ExtResource("5_mher8")
+region_enabled = true
+region_rect = Rect2(0, 0, 288, 199.592)
+
+[node name="HUD1" type="Sprite2D" parent="."]
+position = Vector2(40, 16)
+texture = ExtResource("5_mher8")
+region_enabled = true
+region_rect = Rect2(0, 199.647, 79.9361, 33.3529)
+
+[node name="HUD2" type="Sprite2D" parent="."]
+position = Vector2(280, 16)
+texture = ExtResource("5_mher8")
+region_enabled = true
+region_rect = Rect2(208.516, 199.976, 79.7894, 33.4431)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(0, 0, 24, 0, 24, 104, 64, 104, 88, 96, 120, 112, 120, 136, 152, 136, 152, 112, 192, 104, 232, 80, 248, 88, 248, 0, 256, 0, 256, 152, 0, 152)
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
-polygon = PackedVector2Array(0, 0, 24, 0, 24, 104, 64, 104, 88, 96, 120, 112, 120, 136, 152, 136, 152, 112, 192, 104, 232, 80, 248, 88, 248, 0, 256, 0, 256, 152, 0, 152)
+polygon = PackedVector2Array(-8, 0, 0, 0, 0, 160, 320, 160, 320, 0, 328, 0, 328, 168, -8, 168)
 
 [node name="Player1" parent="." instance=ExtResource("2_5ptf1")]
-position = Vector2(63.8071, 85.4133)
+position = Vector2(56, 144)
 player_number = "1"
 frames = ExtResource("3_isxox")
 
 [node name="Player2" parent="." instance=ExtResource("2_5ptf1")]
-position = Vector2(207.475, 73.8469)
+position = Vector2(288, 144)
 player_number = "2"
 frames = ExtResource("4_fsqmq")
