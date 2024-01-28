@@ -9,7 +9,7 @@
 size = Vector2(16, 27)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od52q"]
-size = Vector2(31, 30)
+size = Vector2(42, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbl4f"]
 size = Vector2(16, 27)
@@ -26,21 +26,21 @@ shape = SubResource("RectangleShape2D_603jh")
 scale = Vector2(0.4, 0.4)
 sprite_frames = ExtResource("2_6hby3")
 animation = &"fish"
+frame = 2
 offset = Vector2(5, 0)
 
 [node name="HitBox" type="Area2D" parent="."]
-visible = false
 script = ExtResource("3_ll44e")
+damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0.5, -5)
+position = Vector2(3, -5)
 shape = SubResource("RectangleShape2D_od52q")
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 script = ExtResource("4_h3ncn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_cbl4f")
-
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]

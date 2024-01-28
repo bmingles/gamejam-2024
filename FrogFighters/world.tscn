@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlxbjf5p3rhy8"]
+[gd_scene load_steps=8 format=3 uid="uid://dlxbjf5p3rhy8"]
 
 [ext_resource type="PackedScene" uid="uid://c406xs2gdbw5y" path="res://player.tscn" id="2_5ptf1"]
 [ext_resource type="SpriteFrames" uid="uid://bvrj62vptk1wp" path="res://resources/mermit_sprite_frames.tres" id="3_isxox"]
 [ext_resource type="SpriteFrames" uid="uid://ilo38ei8qgsp" path="res://resources/termit_sprite_frames.tres" id="4_fsqmq"]
+[ext_resource type="Script" path="res://scripts/health_bar.gd" id="5_6pus4"]
 [ext_resource type="Texture2D" uid="uid://dq72wnjkn55l6" path="res://assets/scenery.png" id="5_mher8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vl60e"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hfte"]
+bg_color = Color(0.752941, 0.164706, 0.156863, 0)
 
 [node name="World" type="Node"]
 
@@ -31,12 +38,40 @@ region_rect = Rect2(208.516, 199.976, 79.7894, 33.4431)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-8, 0, 0, 0, 0, 160, 320, 160, 320, 0, 328, 0, 328, 168, -8, 168)
 
-[node name="Player1" parent="." instance=ExtResource("2_5ptf1")]
+[node name="Player1" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("2_5ptf1")]
 position = Vector2(56, 144)
 player_number = "1"
 frames = ExtResource("3_isxox")
+health_bar = NodePath("../HealthBar1")
 
-[node name="Player2" parent="." instance=ExtResource("2_5ptf1")]
+[node name="Player2" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("2_5ptf1")]
 position = Vector2(288, 144)
 player_number = "2"
 frames = ExtResource("4_fsqmq")
+health_bar = NodePath("../HealthBar2")
+
+[node name="HealthBar1" type="ProgressBar" parent="."]
+offset_left = 17.0
+offset_top = 18.0
+offset_right = 96.0
+offset_bottom = 41.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_vl60e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2hfte")
+step = 1.0
+value = 100.0
+script = ExtResource("5_6pus4")
+
+[node name="HealthBar2" type="ProgressBar" parent="."]
+offset_left = 262.0
+offset_top = 18.0
+offset_right = 341.0
+offset_bottom = 41.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_vl60e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2hfte")
+step = 1.0
+value = 100.0
+script = ExtResource("5_6pus4")

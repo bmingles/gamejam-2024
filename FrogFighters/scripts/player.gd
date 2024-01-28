@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export_enum("1", "2") var player_number: String
 @export var frames: Resource
+@export var health_bar: HealthBar
 
 const SPEED = 50.0
 const JUMP_VELOCITY = -200.0
@@ -14,10 +15,13 @@ func _ready():
 	toggle_attack(false)
 	
 	if player_number == "2":
+		var flip_h_offset = Vector2(-1, 0)
 		$AnimatedSprite2D.set_flip_h(true)
-		$AnimatedSprite2D.offset *= Vector2(-1, 0)
+		$AnimatedSprite2D.offset *= flip_h_offset
+		$HitBox/CollisionShape2D.position *= flip_h_offset
 		
 	$AnimatedSprite2D.set_sprite_frames(frames)
+	$AnimatedSprite2D.connect("animation_finished", _on_animation_finished)
 	
 func _physics_process(delta):
 	# Add the gravity.
@@ -73,4 +77,8 @@ func handle_animation(direction: float):
 		$AnimatedSprite2D.play("jump")
 
 func take_damage(amount: int):
-	print(amount)
+	if health_bar == null:
+		return
+		
+	health_bar.take_damage(amount)
+	
