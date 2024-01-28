@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export_enum("1", "2") var player_number: String
+@export var frames: Resource
 
 const SPEED = 50.0
 const JUMP_VELOCITY = -200.0
@@ -8,7 +9,13 @@ const JUMP_VELOCITY = -200.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-
+func _ready():
+	if player_number == "2":
+		$AnimatedSprite2D.set_flip_h(true)
+		$AnimatedSprite2D.set_offset(Vector2(-5, 0))
+		
+	$AnimatedSprite2D.set_sprite_frames(frames)
+	
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():

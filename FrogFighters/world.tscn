@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlxbjf5p3rhy8"]
+[gd_scene load_steps=5 format=3 uid="uid://dlxbjf5p3rhy8"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_b4utf"]
-[ext_resource type="PackedScene" path="res://player.tscn" id="2_5ptf1"]
+[ext_resource type="PackedScene" uid="uid://c406xs2gdbw5y" path="res://player.tscn" id="2_5ptf1"]
+[ext_resource type="SpriteFrames" uid="uid://bvrj62vptk1wp" path="res://resources/mermit_sprite_frames.tres" id="3_isxox"]
+[ext_resource type="SpriteFrames" uid="uid://ilo38ei8qgsp" path="res://resources/termit_sprite_frames.tres" id="4_fsqmq"]
 
 [node name="World" type="Node"]
 script = ExtResource("1_b4utf")
@@ -12,11 +14,14 @@ script = ExtResource("1_b4utf")
 polygon = PackedVector2Array(0, 0, 24, 0, 24, 104, 64, 104, 88, 96, 120, 112, 120, 136, 152, 136, 152, 112, 192, 104, 232, 80, 248, 88, 248, 0, 256, 0, 256, 152, 0, 152)
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
+polygon = PackedVector2Array(0, 0, 24, 0, 24, 104, 64, 104, 88, 96, 120, 112, 120, 136, 152, 136, 152, 112, 192, 104, 232, 80, 248, 88, 248, 0, 256, 0, 256, 152, 0, 152)
 
 [node name="Player1" parent="." instance=ExtResource("2_5ptf1")]
-position = Vector2(64, 80)
+position = Vector2(63.8071, 85.4133)
 player_number = "1"
+frames = ExtResource("3_isxox")
 
 [node name="Player2" parent="." instance=ExtResource("2_5ptf1")]
-position = Vector2(208, 72)
+position = Vector2(207.475, 73.8469)
 player_number = "2"
+frames = ExtResource("4_fsqmq")
