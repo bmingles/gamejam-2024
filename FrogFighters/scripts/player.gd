@@ -11,6 +11,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking = false
 
 func _ready():
+	toggle_attack(false)
+	
 	if player_number == "2":
 		$AnimatedSprite2D.set_flip_h(true)
 		$AnimatedSprite2D.offset *= Vector2(-1, 0)
@@ -33,6 +35,19 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
+	handle_animation(direction)
+
+	move_and_slide()
+
+
+func _on_animation_finished():
+	toggle_attack(false)
+	
+func toggle_attack(value: bool):
+	is_attacking = value
+	$HitBox/CollisionShape2D.disabled = !is_attacking
+
+func handle_animation(direction: float):
 	var is_fish = Input.is_action_just_pressed("player" + player_number + "_fish")
 	var is_chicken = Input.is_action_just_pressed("player" + player_number + "_chicken")
 	var is_laugh = Input.is_action_just_pressed("player" + player_number + "_laugh")
@@ -41,13 +56,13 @@ func _physics_process(delta):
 	if is_attacking:
 		pass
 	elif is_fish:
-		is_attacking = true
+		toggle_attack(true)
 		$AnimatedSprite2D.play('fish')
 	elif is_laugh:
-		is_attacking = true
+		toggle_attack(true)
 		$AnimatedSprite2D.play('laugh')
 	elif is_chicken:
-		is_attacking = true
+		toggle_attack(true)
 		$AnimatedSprite2D.play('chicken')
 	elif is_on_floor():
 		if direction:
@@ -57,9 +72,5 @@ func _physics_process(delta):
 	else:
 		$AnimatedSprite2D.play("jump")
 
-	move_and_slide()
-
-
-
-func _on_animation_finished():
-	is_attacking = false
+func take_damage(amount: int):
+	print(amount)

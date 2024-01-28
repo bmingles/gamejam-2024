@@ -1,22 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://c406xs2gdbw5y"]
+[gd_scene load_steps=8 format=3 uid="uid://c406xs2gdbw5y"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_meufp"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_meufp"]
 [ext_resource type="SpriteFrames" uid="uid://bvrj62vptk1wp" path="res://resources/mermit_sprite_frames.tres" id="2_6hby3"]
+[ext_resource type="Script" path="res://scripts/hit_box.gd" id="3_ll44e"]
+[ext_resource type="Script" path="res://scripts/hurt_box.gd" id="4_h3ncn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_603jh"]
+size = Vector2(16, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_od52q"]
+size = Vector2(31, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbl4f"]
 size = Vector2(16, 27)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_meufp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_603jh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 sprite_frames = ExtResource("2_6hby3")
-animation = &"laugh"
+animation = &"fish"
 offset = Vector2(5, 0)
+
+[node name="HitBox" type="Area2D" parent="."]
+visible = false
+script = ExtResource("3_ll44e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0.5, -5)
+shape = SubResource("RectangleShape2D_od52q")
+
+[node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("4_h3ncn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_cbl4f")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
