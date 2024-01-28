@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export_enum("1", "2") var player_number: String
 
 const SPEED = 50.0
 const JUMP_VELOCITY = -200.0
@@ -13,18 +14,18 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	# Jump
+	if Input.is_action_just_pressed("player" + player_number + "_jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
+	# Move
+	var direction = Input.get_axis("player" + player_number + "_left", "player" + player_number + "_right")
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
+	# Pick animation
 	if is_on_floor():
 		if direction:
 			$AnimatedSprite2D.play("shuffle")

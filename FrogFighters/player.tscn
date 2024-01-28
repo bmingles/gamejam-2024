@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bls4iqv4t57gi"]
+[gd_scene load_steps=25 format=3 uid="uid://c406xs2gdbw5y"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_meufp"]
 [ext_resource type="Texture2D" uid="uid://d03c84vcs25x4" path="res://assets/mermit.png" id="1_sfwny"]
