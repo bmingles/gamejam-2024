@@ -8,7 +8,7 @@ The first night of the game jam, we were asked as an ice breaker excercise to pi
 
 ![Frog Fighters Video](frog-fighters-fight.gif)
 
-The [https://globalgamejam.org/games/2024/frog-fighters-1](official game) has been posted to the Global Gamejam site.
+The [official submission of Frog Fighters](https://globalgamejam.org/games/2024/frog-fighters-1) has been posted to the Global Gamejam site.
 
 # Controls
 
