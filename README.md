@@ -10,6 +10,21 @@ The first night of the game jam, we were asked as an ice breaker excercise to pi
 
 The [https://globalgamejam.org/games/2024/frog-fighters-1](official game) has been posted to the Global Gamejam site.
 
+# Controls
+
+Frog Fighters has minimal gamepad support (I used 2 different 8 bit do controllers. One of the attack buttons did not work on 1 controller, so no promises on compatibility here). It also supports keyboard controls.
+
+- Player 1
+  - Movement - a,s,d,f
+  - Fish - c
+  - Chicken - v
+  - Laugh - b
+- Player 2
+  - Movement - arrow keys
+  - Fish - ctrl
+  - Chicken - alt / option
+  - Laugh - space
+
 ## Tech Stack
 
 - Godot 4 - game engine used for scripting the game
